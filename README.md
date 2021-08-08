@@ -83,4 +83,18 @@ As we previously saw, Pewlett-Hackard will have 90,398 employees retiring and th
 #### Are there enough qualified, retirement-ready employees in the departments to mentor the next generation of Pewlett Hackard employees?
 There are 1,549 employees that are eligible for the mentorship program, so there will be 58 new employees in charge of each mentor, which can be a very extensive and difficult job, and further analyzing the data we can see that there are no employees thar are qualified for being a mentor in the "Manager" area. So the best option will be to reduce the mentorship elegibility conditions in order that employees with previous titles as managers qualify for being a manager mentor and increase the number of possible mentors in the enterprise.
 
-<img src="./Resources/mentorship_elegibility_count.PNG" alt="Mentorship elegibilty count"/>
+<p align="center">
+<img src="./Resources/mentorship_elegibility_count.PNG" alt="Mentorship elegibilty count" width=100/><img src="./Resources/mentorship_areas.PNG" alt="Mentorship elegibilty count" width=300/>
+</p>
+
+### Additional queries
+
+	-- Query to obtain the number of employees that are in mentorship_elegibility table
+	SELECT COUNT(emp_no) 
+	FROM mentorship_eligibilty;
+
+	-- Query to obtain the number of employees in each area
+	SELECT COUNT(emp_no), title 
+	FROM mentorship_eligibilty
+	GROUP BY title
+	ORDER BY Count(emp_no) DESC;
