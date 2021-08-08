@@ -50,7 +50,37 @@ The next table that was created consisted in grouping employees by each title, s
 
 <img src="./Resources/retiring_titles.PNG" alt="unique titles"/>
 
+### Mentorship Elegibility
+The query used to create this table was:
+
+	SELECT DISTINCT ON(e.emp_no)e.emp_no, 
+	e.first_name, 
+	e.last_name, 
+	e.birth_date, 
+	de.from_date, 
+	de.to_date, 
+	ti.title
+	INTO mentorship_eligibilty
+	FROM employees as e
+	INNER JOIN dept_emp as de
+		ON e.emp_no = de.emp_no
+	INNER JOIN titles as ti
+		ON e.emp_no = ti.emp_no
+	WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
+	     AND (de.to_date = '9999-01-01')
+	ORDER BY e.emp_no;
+For the last table we filtered the employees that where born in 1965 that are currently working in the company, in order to be elegible to become a mentor of the different areas. There are  table is shown below:
+
+<img src="./Resources/mentorship_elegibility_table.PNG" alt="Mentorship elegibilty"/>
+
 ## Summary:
 Provide high-level responses to the following questions, then provide two additional queries or tables that may provide more insight into the upcoming "silver tsunami."
-How many roles will need to be filled as the "silver tsunami" begins to make an impact?
-Are there enough qualified, retirement-ready employees in the departments to mentor the next generation of Pewlett Hackard employees?
+#### How many roles will need to be filled as the "silver tsunami" begins to make an impact?
+As we previously saw, Pewlett-Hackard will have 90,398 employees retiring and the company will need to fill those positions in the following years.
+
+<img src="./Resources/count_unique_titles.PNG" alt="unique titles quantity"/>
+
+#### Are there enough qualified, retirement-ready employees in the departments to mentor the next generation of Pewlett Hackard employees?
+There are 1,549 employees that are eligible for the mentorship program, so there will be 58 new employees in charge of each mentor, which can be a very extensive and difficult job, and further analyzing the data we can see that there are no employees thar are qualified for being a mentor in the "Manager" area. So the best option will be to reduce the mentorship elegibility conditions in order that employees with previous titles as managers qualify for being a manager mentor and increase the number of possible mentors in the enterprise.
+
+<img src="./Resources/mentorship_elegibility_count.PNG" alt="Mentorship elegibilty count"/>
